@@ -53,9 +53,9 @@ class LoginAPI(KnoxLoginView):
 
 ##########LOGIN END#####################
 
-@api_view(['GET'])
-def student_data(request):
-    if request.method =='GET':
+@api_view(['POST'])
+def gettruckowner(request):
+    if request.method =='POST':
         id = request.data.get('id',None)
         if id is not None:
             stu = TruckOwnerModel.objects.get(email_id=id)
@@ -64,6 +64,54 @@ def student_data(request):
         else:
             stu =TruckOwnerModel.objects.all()
             serializer = TruckOwnerModelSerializer(stu,many=True)
+            return  Response(serializer.data,status=status.HTTP_200_OK)
+@api_view(['POST'])
+def gettransporter(request):
+    if request.method =='POST':
+        id = request.data.get('id',None)
+        if id is not None:
+            stu = TransporterModel.objects.get(email_id=id)
+            serializer = TransporterModelSerializer(stu)
+            return  Response(serializer.data,status=status.HTTP_200_OK)
+        else:
+            stu =TransporterModel.objects.all()
+            serializer = TransporterModelSerializer(stu,many=True)
+            return  Response(serializer.data,status=status.HTTP_200_OK)
+@api_view(['POST'])
+def getagent(request):
+    if request.method =='POST':
+        id = request.data.get('id',None)
+        if id is not None:
+            stu = Tranage_Agent.objects.get(email_id=id)
+            serializer = Tranage_AgentSerializer(stu)
+            return  Response(serializer.data,status=status.HTTP_200_OK)
+        else:
+            stu =Tranage_Agent.objects.all()
+            serializer = Tranage_AgentSerializer(stu,many=True)
+            return  Response(serializer.data,status=status.HTTP_200_OK)
+@api_view(['POST'])
+def getdriver(request):
+    if request.method =='POST':
+        id = request.data.get('id',None)
+        if id is not None:
+            stu = DriverRegistrationModel.objects.get(registered_by=id)
+            serializer = DriverRegistrationSerializer(stu)
+            return  Response(serializer.data,status=status.HTTP_200_OK)
+        else:
+            stu =DriverRegistrationModel.objects.all()
+            serializer = DriverRegistrationSerializer(stu,many=True)
+            return  Response(serializer.data,status=status.HTTP_200_OK)
+@api_view(['POST'])
+def getvehicle(request):
+    if request.method =='POST':
+        id = request.data.get('id',None)
+        if id is not None:
+            stu = VehicleRegistraionModel.objects.get(registered_by=id)
+            serializer = VehicleRegistraionModelSerializer(stu)
+            return  Response(serializer.data,status=status.HTTP_200_OK)
+        else:
+            stu =VehicleRegistraionModel.objects.all()
+            serializer = VehicleRegistraionModelSerializer(stu,many=True)
             return  Response(serializer.data,status=status.HTTP_200_OK)
 class TruckOwnerModel_View(ModelViewSet):
     queryset  = TruckOwnerModel.objects.all()
@@ -90,3 +138,13 @@ class DriverRegistrationSerializer_View(ModelViewSet):
     serializer_class = DriverRegistrationSerializer
     authetication_classes = [SessionAuthentication]
     permission_classes = [IsAuthenticated]
+
+
+
+# class GetTruckOwner(ModelViewSet):
+#     serializer_class = TruckOwnerModelSerializer
+#     queryset = TruckOwnerModel.objects.all()
+#     def get_queryset(self):
+#         queryset = self.queryset
+#         query_set = queryset.filter(id=pk)
+#         return query_set

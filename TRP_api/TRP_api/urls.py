@@ -13,12 +13,18 @@ router.register('agent',views.Tranage_AgentSerializer_View,basename='agent')
 router.register('vehicle',views.VehicleRegistraionModelSerializer_View,basename='vehicle')
 router.register('driver',views.DriverRegistrationSerializer_View,basename='driver')
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(router.urls)),
     path('auth/',include('rest_framework.urls')),
     path('gettoken/',obtain_auth_token),
-    path('getuser/',views.student_data,name='stu'),
+    path('gettruckowner/',views.gettruckowner,name='gettruckowner'),
+    path('gettransporter/',views.gettransporter,name='gettransporter'),
+    path('getagent/',views.getagent,name='getagent'),
+
+    path('getdriver/',views.getdriver,name='getdriver'),
+    path('getvehicle/',views.getvehicle,name='getvehicle'),
 
     path('api/register/', views.RegisterAPI.as_view(), name='register'),
     path('api/login/', views.LoginAPI.as_view(), name='login'),
