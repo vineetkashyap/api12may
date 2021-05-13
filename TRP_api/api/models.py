@@ -74,7 +74,7 @@ class Tranage_Agent(models.Model):
 
 
 class VehicleRegistraionModel(models.Model):
-    truck_owner = models.ForeignKey(TruckOwnerModel,on_delete=models.CASCADE)
+
     vehicle_registration_number = models.CharField(max_length=50)
     owner_name  =models.CharField(max_length=50)
     owner_contact_number = models.CharField(max_length=500)
@@ -100,7 +100,6 @@ class VehicleRegistraionModel(models.Model):
 
 
 class DriverRegistrationModel(models.Model):
-    truck_owner = models.ForeignKey(TruckOwnerModel,on_delete=models.CASCADE)
     driver_name = models.CharField(max_length=100)
     father_name = models.CharField(max_length=100)
     mobile_number = models.CharField(max_length=50)
