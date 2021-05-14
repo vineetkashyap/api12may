@@ -70,7 +70,7 @@ def gettransporter(request):
     if request.method =='POST':
         id = request.data.get('id',None)
         if id is not None:
-            stu = TransporterModel.objects.get(email_id=id)
+            stu = TransporterModel.objects.get(email=id)
             serializer = TransporterModelSerializer(stu)
             return  Response(serializer.data,status=status.HTTP_200_OK)
         else:
