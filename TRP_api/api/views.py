@@ -94,8 +94,8 @@ def getdriver(request):
     if request.method =='POST':
         id = request.data.get('id',None)
         if id is not None:
-            stu = DriverRegistrationModel.objects.get(registered_by=id)
-            serializer = DriverRegistrationSerializer(stu)
+            stu = DriverRegistrationModel.objects.filter(registered_by=id)
+            serializer = DriverRegistrationSerializer(stu,many=True)
             return  Response(serializer.data,status=status.HTTP_200_OK)
         else:
             stu =DriverRegistrationModel.objects.all()
@@ -106,8 +106,8 @@ def getvehicle(request):
     if request.method =='POST':
         id = request.data.get('id',None)
         if id is not None:
-            stu = VehicleRegistraionModel.objects.get(registered_by=id)
-            serializer = VehicleRegistraionModelSerializer(stu)
+            stu = VehicleRegistraionModel.objects.filter(registered_by=id)
+            serializer = VehicleRegistraionModelSerializer(stu,many=True)
             return  Response(serializer.data,status=status.HTTP_200_OK)
         else:
             stu =VehicleRegistraionModel.objects.all()
